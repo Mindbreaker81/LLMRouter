@@ -51,6 +51,8 @@ class TSRouterTrainer(BaseTrainer):
         else:
             print("[TSRouterTrainer] Router already initialized; skipping re-init.")
 
-        # Persist the trained model.
-        router.save_router()
-        print("[TSRouterTrainer] Training complete.")
+        # Training loop already saved best-val checkpoint to model_path.
+        # In-memory model is at last epoch — reload best-val checkpoint so
+        # subsequent route_batch() calls use the validated model.
+        router.load_pretrained()
+        print("[TSRouterTrainer] Training complete (loaded best-val checkpoint).")
