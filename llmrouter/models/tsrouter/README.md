@@ -1,4 +1,4 @@
-# TSRouter — 4-Partite Heterogeneous Graph Router
+# TSRouter
 
 ## Overview
 
