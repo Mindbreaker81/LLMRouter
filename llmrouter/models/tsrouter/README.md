@@ -240,3 +240,8 @@ The `data_path` section in the YAML is populated with placeholder paths to satis
 - PyTorch Geometric (`torch_geometric`) ≥ 2.4
 - vLLM (optional, for on-the-fly query embedding)
 - TSRouter source code at `../../TSRouter/` (relative to `LLMRouter/`)
+---
+
+## Reproducing the TSRBench Oracle
+
+The oracle correctness scores that TSRouter trains on can be reproduced from scratch — downloading TSRBench and running all six candidate models locally via vLLM — with the self-contained scripts in [`tsrbench/`](../../../tsrbench/) at the repository root.
