@@ -27,12 +27,16 @@ bash inference/vision_opensource/vision_inference_opensource.sh
 bash inference/multimodal_opensource/multimodal_inference_opensource.sh
 ```
 
-## Score the outputs
+## Build the oracle
 
-Inference outputs are written to `evaluation/results/<modality>/<dataset>_<model>/generated_answer.json`. Score a model across all tasks with:
+Inference outputs are written to `evaluation/results/<modality>/<dataset>_<model>/generated_answer.json`. Score every generated answer against the TSRBench ground truth and assemble the oracle files TSRouter trains on:
+
+```bash
+python evaluation/build_oracle.py --oracle-out ../../TSRouter/data/oracle_full.csv --token-counts-out ../../TSRouter/data/token_counts.json
+```
+
+This writes `oracle_full.csv` (per-query correctness of every candidate: `task_type, file, line_idx, candidate, modality, score`) and `token_counts.json` (per-query token counts for cost computation) into the sibling `TSRouter/data/` directory that the TSRouter plugin reads from. To inspect a single model's per-task and overall accuracy, use:
 
 ```bash
 python evaluation/evaluate.py --model Qwen/Qwen3-8B --modality text --workdir ./evaluation
 ```
-
-This prints per-task and overall accuracy. The per-query correctness indicators correspond to the rows of TSRouter's `oracle_full.csv` (`task_type, file, line_idx, candidate, modality, score`).

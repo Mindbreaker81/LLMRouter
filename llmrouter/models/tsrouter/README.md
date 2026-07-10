@@ -217,12 +217,12 @@ TSRouter uses its **own data files** (separate from the standard LLMRouter JSONL
 | File | Description |
 |------|-------------|
 | `configs/model_descriptions.json` | Model metadata (name, modality, description, pricing) — hand-maintained |
-| `data/oracle_full.csv` | Oracle correctness scores of all candidates on TSRBench |
+| `data/oracle_full.csv` | Oracle correctness scores of all candidates on TSRBench — **generated** via [`tsrbench/`](../../../tsrbench/) |
 | `data/router_data.csv` | `N_query × N_candidate` rows of `(query_id, candidate, effect_score, cost, …)` — **generated** |
 | `configs/candidate_embeddings.pkl` | Candidate (modality-model) embeddings — **generated** |
 | `data/query_embeddings.npy`, `data/*.npy` | Query / task / modality / model node embeddings — **generated** |
 
-Only `model_descriptions.json` and `oracle_full.csv` are inputs. Everything marked **generated** is built automatically by TSRouter's data-construction phase, which samples TSRBench, embeds queries and node descriptions with a sentence-transformer, and joins the oracle scores:
+Only `model_descriptions.json` is hand-maintained; `oracle_full.csv` is produced by running the candidate models on TSRBench with the [`tsrbench/`](../../../tsrbench/) scripts. Everything else marked **generated** is built automatically by TSRouter's data-construction phase, which samples TSRBench, embeds queries and node descriptions with a sentence-transformer, and joins the oracle scores:
 
 ```bash
 cd ../TSRouter          # sibling of LLMRouter/
