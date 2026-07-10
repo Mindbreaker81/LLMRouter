@@ -32,20 +32,20 @@ metric:
 
 hparam:
   # GNN architecture
-  embedding_dim: 64           # Hidden dimension after FeatureAlign (4096 → D)
-  num_layers: 2               # Number of HGTConv layers
+  embedding_dim: 128          # Hidden dimension after FeatureAlign (4096 → D)
+  num_layers: 1               # Number of HGTConv layers
   heads: 4                    # Multi-head attention heads
   use_reverse_edges: true     # Add reverse edges (query→task, mod→query, etc.)
 
   # Soft-label training
   loss_type: kl               # 'kl' (recommended) or 'bce'
-  label_temperature: 1.0      # Temperature τ for softmax over effect scores
+  label_temperature: 0.5      # Temperature τ for softmax over effect scores
   alpha: 1.0                  # Effect weight in combined label
   beta: 0.0                   # Cost weight in combined label
 
   # KNN query-similarity edges
-  knn_k: 60                   # Number of KNN neighbours per query node
-  knn_source: embedding       # Feature source for KNN: 'ts_stat' or 'embedding'
+  knn_k: 30                   # Number of KNN neighbours per query node
+  knn_source: ts_stat         # Feature source for KNN: 'ts_stat' or 'embedding'
 
   # Prediction head
   pred_mode: mlp              # 'mlp' (default) or 'dot'
