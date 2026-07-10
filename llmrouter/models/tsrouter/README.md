@@ -212,16 +212,24 @@ results = router.route_batch()
 
 ## Data Requirements
 
-TSRouter uses its **own data files** (separate from the standard LLMRouter JSONL format):
+TSRouter uses its **own data files** (separate from the standard LLMRouter JSONL format), resolved relative to the `TSRouter/` directory:
 
 | File | Description |
 |------|-------------|
-| `data/router_data.csv` | `N_query × N_candidate` rows of `(query_id, candidate, effect_score, cost, …)` |
-| `configs/model_descriptions.json` | Model metadata (name, modality, description) |
-| `configs/candidate_embeddings.pkl` | Pre-computed LLM embeddings for modality and model nodes |
-| `data/query_embeddings.npy` | Pre-computed query embeddings (4096-dim) — auto-generated on first run |
+| `configs/model_descriptions.json` | Model metadata (name, modality, description, pricing) — hand-maintained |
+| `data/oracle_full.csv` | Oracle correctness scores of all candidates on TSRBench |
+| `data/router_data.csv` | `N_query × N_candidate` rows of `(query_id, candidate, effect_score, cost, …)` — **generated** |
+| `configs/candidate_embeddings.pkl` | Candidate (modality-model) embeddings — **generated** |
+| `data/query_embeddings.npy`, `data/*.npy` | Query / task / modality / model node embeddings — **generated** |
 
-The `data_path` section in the YAML is populated with placeholder paths to satisfy the MetaRouter base class but is **not consumed** by TSRouter.
+Only `model_descriptions.json` and `oracle_full.csv` are inputs. Everything marked **generated** is built automatically by TSRouter's data-construction phase, which samples TSRBench, embeds queries and node descriptions with a sentence-transformer, and joins the oracle scores:
+
+```bash
+cd ../TSRouter          # sibling of LLMRouter/
+python run_exp.py       # Phase 1 generates router_data.csv + all embeddings, then trains
+```
+
+To rebuild the oracle scores themselves (or add new candidate models), see [`tsrbench/`](../../../tsrbench/). The `data_path` section in the YAML is populated with placeholder paths to satisfy the MetaRouter base class but is **not consumed** by TSRouter.
 
 ---
 
