@@ -19,10 +19,10 @@ Outputs (under --out-dir, default data/tsrbench_data/):
 
 Usage (from the tsrbench/ directory, after building the oracle):
     python convert_to_llmrouter.py \
-        --oracle ../../TSRouter/data/oracle_full.csv \
-        --token-counts ../../TSRouter/data/token_counts.json \
-        --model-descriptions ../../TSRouter/configs/model_descriptions.json \
-        --out-dir ../data/tsrbench_data
+        --oracle ../../../TSRouter/data/oracle_full.csv \
+        --token-counts ../../../TSRouter/data/token_counts.json \
+        --model-descriptions ../../../TSRouter/configs/model_descriptions.json \
+        --out-dir ../tsrbench_data
 
     # Skip the (GPU/slow) embedding step:
     python convert_to_llmrouter.py --oracle ... --skip-embeddings
@@ -140,10 +140,10 @@ def load_queries(datasets_root):
 def main():
     parser = argparse.ArgumentParser(description="Convert TSRBench + oracle to LLMRouter benchmark format")
     parser.add_argument("--datasets-root", default="datasets/TSRBench")
-    parser.add_argument("--oracle", default="../../TSRouter/data/oracle_full.csv")
-    parser.add_argument("--token-counts", default="../../TSRouter/data/token_counts.json")
-    parser.add_argument("--model-descriptions", default="../../TSRouter/configs/model_descriptions.json")
-    parser.add_argument("--out-dir", default="../data/tsrbench_data")
+    parser.add_argument("--oracle", default="../../../TSRouter/data/oracle_full.csv")
+    parser.add_argument("--token-counts", default="../../../TSRouter/data/token_counts.json")
+    parser.add_argument("--model-descriptions", default="../../../TSRouter/configs/model_descriptions.json")
+    parser.add_argument("--out-dir", default="../tsrbench_data")
     parser.add_argument("--test-ratio", type=float, default=0.2)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--embedding-model", default="sentence-transformers/all-MiniLM-L6-v2")

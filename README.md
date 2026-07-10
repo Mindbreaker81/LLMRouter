@@ -392,7 +392,7 @@ CUDA_VISIBLE_DEVICES=2 llmrouter train --router mlprouter --config configs/model
 # Train MF router quietly
 CUDA_VISIBLE_DEVICES=1 llmrouter train --router mfrouter --config configs/model_config_train/mfrouter.yaml --device cuda --quiet
 
-# Train TSRouter (time series modality-model routing; see tsrbench/ for data preparation)
+# Train TSRouter (time series modality-model routing; see data/tsrbench/ for data preparation)
 llmrouter train --router tsrouter --config configs/model_config_train/tsrouter.yaml --device cuda
 ```
 

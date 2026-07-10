@@ -1,6 +1,6 @@
 # TSRBench Data & Candidate Inference
 
-Self-contained scripts to download the [TSRBench](https://huggingface.co/datasets/umd-zhou-lab/TSRBench) benchmark and reproduce the oracle correctness scores that the [TSRouter plugin](../llmrouter/models/tsrouter/) is trained on. All commands below are run from this `tsrbench/` directory.
+Self-contained scripts to download the [TSRBench](https://huggingface.co/datasets/umd-zhou-lab/TSRBench) benchmark and reproduce the oracle correctness scores that the [TSRouter plugin](../../llmrouter/models/tsrouter/) is trained on. All commands below are run from this `tsrbench/` directory.
 
 ## Download the dataset
 
@@ -32,7 +32,7 @@ bash inference/multimodal_opensource/multimodal_inference_opensource.sh
 Inference outputs are written to `evaluation/results/<modality>/<dataset>_<model>/generated_answer.json`. Score every generated answer against the TSRBench ground truth and assemble the oracle files TSRouter trains on:
 
 ```bash
-python evaluation/build_oracle.py --oracle-out ../../TSRouter/data/oracle_full.csv --token-counts-out ../../TSRouter/data/token_counts.json
+python evaluation/build_oracle.py --oracle-out ../../../TSRouter/data/oracle_full.csv --token-counts-out ../../../TSRouter/data/token_counts.json
 ```
 
 This writes `oracle_full.csv` (per-query correctness of every candidate: `task_type, file, line_idx, candidate, modality, score`) and `token_counts.json` (per-query token counts for cost computation) into the sibling `TSRouter/data/` directory that the TSRouter plugin reads from. To inspect a single model's per-task and overall accuracy, use:
@@ -47,10 +47,10 @@ TSRBench's native format (time-series arrays + per-candidate oracle CSV) does no
 
 ```bash
 python convert_to_llmrouter.py \
-    --oracle ../../TSRouter/data/oracle_full.csv \
-    --token-counts ../../TSRouter/data/token_counts.json \
-    --model-descriptions ../../TSRouter/configs/model_descriptions.json \
-    --out-dir ../data/tsrbench_data
+    --oracle ../../../TSRouter/data/oracle_full.csv \
+    --token-counts ../../../TSRouter/data/token_counts.json \
+    --model-descriptions ../../../TSRouter/configs/model_descriptions.json \
+    --out-dir ../tsrbench_data
 ```
 
 This writes `query_data_{train,test}.jsonl`, `routing_data_{train,test}.jsonl`, `llm_data.json`, `llm_embeddings.json`, and `query_embeddings.pt` (pass `--skip-embeddings` to skip the embedding step). Point any standard router's YAML at them:

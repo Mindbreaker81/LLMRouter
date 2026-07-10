@@ -217,19 +217,19 @@ TSRouter uses its **own data files** (separate from the standard LLMRouter JSONL
 | File | Description |
 |------|-------------|
 | `configs/model_descriptions.json` | Model metadata (name, modality, description, pricing) — hand-maintained |
-| `data/oracle_full.csv` | Oracle correctness scores of all candidates on TSRBench — **generated** via [`tsrbench/`](../../../tsrbench/) |
+| `data/oracle_full.csv` | Oracle correctness scores of all candidates on TSRBench — **generated** via [`tsrbench/`](../../../data/tsrbench/) |
 | `data/router_data.csv` | `N_query × N_candidate` rows of `(query_id, candidate, effect_score, cost, …)` — **generated** |
 | `configs/candidate_embeddings.pkl` | Candidate (modality-model) embeddings — **generated** |
 | `data/query_embeddings.npy`, `data/*.npy` | Query / task / modality / model node embeddings — **generated** |
 
-Only `model_descriptions.json` is hand-maintained; `oracle_full.csv` is produced by running the candidate models on TSRBench with the [`tsrbench/`](../../../tsrbench/) scripts. Everything else marked **generated** is built automatically by TSRouter's data-construction phase, which samples TSRBench, embeds queries and node descriptions with a sentence-transformer, and joins the oracle scores:
+Only `model_descriptions.json` is hand-maintained; `oracle_full.csv` is produced by running the candidate models on TSRBench with the [`tsrbench/`](../../../data/tsrbench/) scripts. Everything else marked **generated** is built automatically by TSRouter's data-construction phase, which samples TSRBench, embeds queries and node descriptions with a sentence-transformer, and joins the oracle scores:
 
 ```bash
 cd ../TSRouter          # sibling of LLMRouter/
 python run_exp.py       # Phase 1 generates router_data.csv + all embeddings, then trains
 ```
 
-To rebuild the oracle scores themselves (or add new candidate models), see [`tsrbench/`](../../../tsrbench/). The `data_path` section in the YAML is populated with placeholder paths to satisfy the MetaRouter base class but is **not consumed** by TSRouter.
+To rebuild the oracle scores themselves (or add new candidate models), see [`tsrbench/`](../../../data/tsrbench/). The `data_path` section in the YAML is populated with placeholder paths to satisfy the MetaRouter base class but is **not consumed** by TSRouter.
 
 ---
 
@@ -252,4 +252,4 @@ To rebuild the oracle scores themselves (or add new candidate models), see [`tsr
 
 ## Reproducing the TSRBench Oracle
 
-The oracle correctness scores that TSRouter trains on can be reproduced from scratch — downloading TSRBench and running all six candidate models locally via vLLM — with the self-contained scripts in [`tsrbench/`](../../../tsrbench/) at the repository root.
+The oracle correctness scores that TSRouter trains on can be reproduced from scratch — downloading TSRBench and running all six candidate models locally via vLLM — with the self-contained scripts in [`tsrbench/`](../../../data/tsrbench/) at the repository root.
