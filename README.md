@@ -74,7 +74,6 @@
 | `hybrid_llm` | ✅ | ✅ | Hybrid LLM routing strategy | [📖](llmrouter/models/hybrid_llm/README.md) |
 | `graphrouter` | ✅ | ✅ | Graph-based routing | [📖](llmrouter/models/graphrouter/README.md) |
 | `causallm_router` | ✅ | ✅ | Causal Language Model router | [📖](llmrouter/models/causallm_router/README.md) |
-| `tsrouter` | ✅ | ✅ | Time series (modality, model) routing via 4-partite heterogeneous graph | [📖](llmrouter/models/tsrouter/README.md) |
 | `smallest_llm` | N/A | ✅ | Always routes to smallest model | [📖](llmrouter/models/smallest_llm/README.md) |
 | `largest_llm` | N/A | ✅ | Always routes to largest model | [📖](llmrouter/models/largest_llm/README.md) |
 
@@ -82,6 +81,11 @@
 | Router | Training | Inference | Description | Tutorial |
 |--------|:--------:|:---------:|-------------|:--------:|
 | `router_r1` | [LINK](https://github.com/ulab-uiuc/Router-R1) | ✅ | Pre-trained Router-R1 model for multi-turn conversations | [📖](llmrouter/models/router_r1/README.md) |
+
+### Multimodal Routers
+| Router | Training | Inference | Description | Tutorial |
+|--------|:--------:|:---------:|-------------|:--------:|
+| `tsrouter` | ✅ | ✅ | Routes time series queries to the best (modality, model) pair — text LLMs vs. visual/mix VLMs — via a 4-partite heterogeneous graph ([TSRouter, COLM 2026](https://github.com/tianyi-lab/TSRouter)) | [📖](llmrouter/models/tsrouter/README.md) |
 
 ### Personalized Routers
 | Router | Training | Inference | Description | Tutorial |
