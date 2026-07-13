@@ -30,7 +30,7 @@
 **LLMRouter** is an intelligent routing system designed to optimize LLM inference by dynamically selecting the most suitable model for each query. To achieve intelligent routing, it defines:
 
 1. 🚀 *Smart Routing*: Automatically routes queries to the optimal LLM based on task complexity, cost, and performance requirements.
-2. 📊 *Multiple Router Models*: Support for **over 16 routing models**, organized into four major categories—**single-round routers, multi-round routers, agentic routers, and personalized routers**—covering a wide range of strategies such as KNN, SVM, MLP, Matrix Factorization, Elo Rating, graph-based routing, BERT-based routing, hybrid probabilistic methods, transformed-score routers, and more.
+2. 📊 *Multiple Router Models*: Support for **over 16 routing models**, organized into five major categories—**single-round routers, multi-round routers, multimodal routers, agentic routers, and personalized routers**—covering a wide range of strategies such as KNN, SVM, MLP, Matrix Factorization, Elo Rating, graph-based routing, BERT-based routing, hybrid probabilistic methods, transformed-score routers, and more.
 3. 🛠️ *Unified CLI*: Complete command-line interface for training, inference, and interactive chat with Gradio-based UI.
 4. 📈 *Data Generation Pipeline*: Complete pipeline for generating training data from 11 benchmark datasets with automatic API calling and evaluation.
 
